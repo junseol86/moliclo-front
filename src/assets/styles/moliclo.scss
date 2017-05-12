@@ -1,0 +1,18 @@
+body {
+  background-color: #fafafa;
+  font-size: 0.9em;
+  line-height: 1.2em;
+}
+
+._float_con {
+  overflow: hidden;
+  & > * {
+    float: left;
+    &._fl_r {
+      float: right;
+    }
+  }
+  &:after {
+    clear: both;
+  }
+}
