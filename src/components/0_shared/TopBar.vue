@@ -22,6 +22,15 @@
 </script>
 
 <style lang="scss">
+  #top-bar-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+  }
+
   #top-bar {
     height: 54px;
     &:after {
@@ -69,15 +78,6 @@
 
   @media only screen and (min-width: 1024px) {
     
-    #top-bar-wrapper {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: white;
-      border-bottom: 1px solid #ddd;
-    }
-
     #top-bar {
       width: 1024px;
       margin: 0 auto;

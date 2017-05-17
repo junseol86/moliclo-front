@@ -2,31 +2,41 @@
   <div id="main-page">
     <top-bar v-bind:props="topBarProps"></top-bar>
     <div id="main-page-wrapper" class="_float_con">
-      <!--<posting-thumb v-for="posting in postings" v-bind:posting="posting"></posting-thumb>-->
+      <posting-thumb v-for="posting in postings" :key = posting.idx v-bind:posting="posting"></posting-thumb>
     </div>
   </div>
 </template>
 
 <script>
-//   import PostingThumb from '../reused/PostingThumb'
+  import PostingThumb from '../0_shared/PostingThumb'
   import TopBar from '../0_shared/TopBar'
+  import secrets from '../../utils/secrets.js'
 
   export default {
-    // components: {PostingThumb, TopBar},
-    components: {TopBar},
+    components: {PostingThumb, TopBar},
     name: 'main-page',
     data () {
       return {
         topBarProps: {
           location: 'main-page'
         },
-        postings: []
+        postings: [],
+        page: 0,
+        perPage: 0
       }
     },
     methods: {
+      getList: function () {
+        this.perPage = window.innerWidth > 768 ? 30 : 5
+        this.$http.get(`${secrets.server.diploy}postings?page=${this.page}&per_page=${this.perPage}`)
+          .then((result) => {
+            this.postings = result.data.postingList
+            console.log(result)
+          })
+      },
       sizeWrapper: function () {
         if (window.innerWidth > 768) {
-          let wrapperWidth = Math.floor(window.innerWidth / 322) * 322
+          let wrapperWidth = Math.floor(window.innerWidth / 312) * 312
           document.getElementById('main-page-wrapper').style.width = wrapperWidth + 'px'
         }
       }
@@ -37,6 +47,7 @@
       window.addEventListener('resize', function () {
         sizeWrapper()
       })
+      this.getList()
     }
   }
 
