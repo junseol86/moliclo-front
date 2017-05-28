@@ -2,7 +2,9 @@
   <div id="main-page">
     <top-bar v-bind:props="topBarProps"></top-bar>
     <div id="main-page-wrapper" class="_float_con">
-      <posting-thumb v-for="posting in postings" :key = posting.idx v-bind:posting="posting"></posting-thumb>
+      <div v-for="posting in postings" :key=posting.idx v-on:click="goToPosting(posting.idx)">
+        <posting-thumb v-bind:posting="posting"></posting-thumb>
+      </div>
     </div>
   </div>
 </template>
@@ -28,10 +30,9 @@
     methods: {
       getList: function () {
         this.perPage = window.innerWidth > 768 ? 30 : 5
-        this.$http.get(`${secrets.server.diploy}postings?page=${this.page}&per_page=${this.perPage}`)
+        this.$http.get(`${secrets.server.dev}postings?page=${this.page}&per_page=${this.perPage}`)
           .then((result) => {
             this.postings = result.data.postingList
-            console.log(result)
           })
       },
       sizeWrapper: function () {
@@ -39,6 +40,9 @@
           let wrapperWidth = Math.floor(window.innerWidth / 312) * 312
           document.getElementById('main-page-wrapper').style.width = wrapperWidth + 'px'
         }
+      },
+      goToPosting: function (posting) {
+        this.$router.push(`postings/${posting}`)
       }
     },
     mounted () {
@@ -53,7 +57,7 @@
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   #main-page-wrapper {
     padding: 64px 16px 16px 16px;
     margin: 0 auto;
