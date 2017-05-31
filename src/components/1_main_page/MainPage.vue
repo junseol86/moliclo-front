@@ -30,7 +30,7 @@
     methods: {
       getList: function () {
         this.perPage = window.innerWidth > 768 ? 30 : 5
-        this.$http.get(`${secrets.server.dev}postings?page=${this.page}&per_page=${this.perPage}`)
+        this.$http.get(`${secrets.server.dev}/postings?page=${this.page}&per_page=${this.perPage}`)
           .then((result) => {
             this.postings = result.data.postingList
           })
@@ -54,7 +54,6 @@
       this.getList()
     }
   }
-
 </script>
 
 <style scoped lang="scss">
