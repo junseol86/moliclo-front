@@ -25,6 +25,30 @@
           backgroundSize: `${bgW}px ${bgH}px`,
           backgroundPosition: `${bgX}px ${bgY}px`
         }
+      },
+      fitToImageStyle: function (element, image) {
+        var elW = element.offsetWidth
+        var imgW = image.width
+        var imgH = image.height
+        var bgW = 0
+        var bgH = 0
+        var bgX = 0
+        var bgY = 0
+        if (elW < imgW) {
+          bgW = elW
+          bgH = imgH * bgW / imgW
+        } else {
+          bgW = imgW
+          bgH = imgH
+          bgX = (elW - imgW) / 2
+        }
+        return {
+          background: `url(${image.src}) no-repeat`,
+          backgroundSize: `${bgW}px ${bgH}px`,
+          backgroundPosition: `${bgX}px ${bgY}px`,
+          width: `${elW}px`,
+          height: `${bgH}px`
+        }
       }
     }
   }

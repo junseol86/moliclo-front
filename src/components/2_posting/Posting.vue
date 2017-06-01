@@ -47,6 +47,8 @@
             this.getCards(postingIdx, page + 1, cardsPerPage, args)
           } else {
             // 현재 로드중인 포스팅의 카드가 모두 로드되었을 때
+            // 로드한 포스팅의 첫번째 카드에 포스팅의 정보를 넣어준다.
+            // (포스팅 페이지에서 첫번째 카드에 작성자 정보가 나타나도록)
             args.currentPosting.cards[0].postingInfo = args.currentPosting.posting
             args.cards = args.currentPosting.cards.concat(args.cards)
             if (args.currentPosting.posting.prev_post !== 0) {
@@ -56,13 +58,13 @@
             } else {
               // 이 포스팅이 로드할 마지막(순서로는 첫번째) 포스팅일 때
               this.cards = args.cards
-              console.log(this.cards)
             }
           }
         })
       }
     },
     activated () {
+      this.cards = []
       this.getPosting(this.$route.params.posting, 2, {lastCard: 0, cards: []})
     }
   }
