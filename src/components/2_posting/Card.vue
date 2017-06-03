@@ -3,7 +3,10 @@
     <div id="card-wrapper" class="_float_con">
         <div id="author">
           <div v-if="card.postingInfo">
-            {{ card.postingInfo.user_name }}
+            <div id="user-thumbnail" v-bind:style="userThumbStyle"></div>
+            <div id="user-name">
+              {{ card.postingInfo.user_name }}
+            </div>
           </div>
         </div>
         <div id="content">
@@ -30,6 +33,11 @@
           backgroundPosition: '',
           width: '',
           height: ''
+        },
+        userThumbStyle: {
+          background: '',
+          backgroundSize: '',
+          backgroundPosition: ''
         }
       }
     },
@@ -46,13 +54,27 @@
           self.cardImageStyle.backgroundPosition = resultStyle.backgroundPosition
           self.cardImageStyle.width = resultStyle.width
           self.cardImageStyle.height = resultStyle.height
-          console.log(self.cardImageStyle)
+        }
+      },
+      setUserThumbBg: function () {
+        var ip = require('../../scripts/image_processor.js')
+        var bgImg = new Image()
+        var self = this
+        bgImg.src = this.card.postingInfo.user_thumbnail
+        bgImg.onload = function () {
+          var resultStyle = ip.imageProcessor().fillImageStyle(document.getElementById('user-thumbnail'), this)
+          self.userThumbStyle.background = resultStyle.background
+          self.userThumbStyle.backgroundSize = resultStyle.backgroundSize
+          self.userThumbStyle.backgroundPosition = resultStyle.backgroundPosition
         }
       }
     },
     mounted () {
       if (this.card.card_type === 'IMAGE') {
         this.setImageCardBg()
+      }
+      if (this.card.postingInfo) {
+        this.setUserThumbBg()
       }
     }
   }
@@ -93,6 +115,23 @@
     #author {
       width: 100px;
       min-height: 1px;
+      text-align: right;
+      > div > * {
+        display: inline-block;
+      }
+      #user-thumbnail {
+        width: 44px;
+        height: 44px;
+        margin: 2px 12px;
+        border-radius: 22px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      #user-name {
+        margin-right: 15px;
+        font-size: 0.9em;
+        font-weight: bold;
+      }
     }
     #content {
       width: 500px;
