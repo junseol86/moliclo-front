@@ -77,7 +77,7 @@
   
   @media only screen and (min-width: 1024px) {
     #posting-wrapper {
-      width: 880px;
+      width: 760px;
       margin: 72px auto;
     }
   }
