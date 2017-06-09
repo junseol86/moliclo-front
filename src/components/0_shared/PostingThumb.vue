@@ -161,7 +161,7 @@
     }
   }
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 1023px) {
 
     #posting-thumb-wrapper {
       width: 300px;
@@ -169,9 +169,6 @@
     }
     #posting-thumb-wrapper:hover {
       border: 1px solid #78c199;
-    }
-
-    .posting-thumb {
     }
   }
 </style>

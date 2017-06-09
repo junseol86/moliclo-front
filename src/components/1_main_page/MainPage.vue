@@ -58,7 +58,15 @@
 
 <style scoped lang="scss">
   #main-page-wrapper {
-    padding: 64px 16px 16px 16px;
+    padding: 72px 16px 4px 16px;
     margin: 0 auto;
+  }
+  
+  @media only screen and (max-width: 1023px) {
+    #main-page-wrapper {
+      > div {
+        width: 100%;
+      }
+    }
   }
 </style>

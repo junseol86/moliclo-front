@@ -73,6 +73,7 @@
 <style scoped lang="scss">
   #posting-wrapper {
     margin: 72px auto;
+    padding: 0 16px; 
   }
   
   @media only screen and (min-width: 1024px) {

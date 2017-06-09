@@ -12,6 +12,9 @@
             </div>
           </div>
         </div>
+        <div id="below-author" v-if="card.postingInfo">
+          <!--모바일에서 올린이 정보와 컨텐츠를 구분하기 위함-->
+        </div>
         <div id="content">
           <div id="card-text" v-if="card.card_type === 'TEXT'">{{ card.cont_1 }}</div>
           <div v-if="card.card_type === 'IMAGE'">
@@ -129,14 +132,50 @@
 
   @media only screen and (max-width:1023px) {
     #card-wrapper {
-      margin-bottom: 8px;
-      background: white;
+      overflow: hidden;
+      padding-bottom: 8px;
       #author {
         width: 100%;
         background: white;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        border-radius: 6px;
+        color: white;
+        background-color: #509c6f;
+        > div {
+          height: 60px;
+        }
+        #user-thumbnail {
+          position: absolute;
+          left: 12px;
+          top: 8px;
+          width: 44px;
+          height: 44px;
+          border-radius: 22px;
+          box-sizing: border-box;
+        }
+        #user-name {
+          position: absolute;
+          left: 66px;
+          top: 14px;
+          font-weight: bold;
+        }
+        #posting-date {
+          position: absolute;
+          left: 66px;
+          top: 32px;
+          font-size: 0.8em;
+          opacity: 0.5;
+        }
+      }
+      #below-author {
+        width: 100%;
+        height: 8px;
       }
       #content {
         width: 100%;
+        background: white;
+        border-radius: 6px;
       }
       #buttons {
         width: 100%;
