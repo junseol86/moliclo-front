@@ -31,7 +31,7 @@
       // 갈라져 나온 것일 경우 최초 포스팅까지 순서대로 도달하기 위함이다.
       // Stateless한 사이트를 위해 functional한 방식으로 구현
       getPosting: function (postingIdx, cardsPerPage, args) {
-        this.$http.get(`${secrets.server.dev}/postings/${postingIdx}?last=${args.lastCard}`)
+        this.$http.get(`${secrets.server.deploy}/postings/${postingIdx}?last=${args.lastCard}`)
           .then((result) => {
             args.currentPosting = result.data
             args.currentPosting.cards = []
@@ -39,7 +39,7 @@
           })
       },
       getCards: function (postingIdx, page, cardsPerPage, args) {
-        this.$http.get(`${secrets.server.dev}/cards?posting=${postingIdx}&page=${page}&per_page=${cardsPerPage}&last=${args.lastCard}`)
+        this.$http.get(`${secrets.server.deploy}/cards?posting=${postingIdx}&page=${page}&per_page=${cardsPerPage}&last=${args.lastCard}`)
         .then((result) => {
           args.currentPosting.cards = args.currentPosting.cards.concat(result.data)
           if (args.currentPosting.cards.length < args.currentPosting.card_total) {

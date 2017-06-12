@@ -3,7 +3,7 @@
     <div id="top-bar">
       <div id="logo" v-on:click="routeTo('/')"></div>
       <div class="button" v-bind:class="{ '-on': props.location=='write'}" id="write"></div>
-      <div class="button" v-bind:class="{ '-on': props.location=='my-page'}" id="my-page" v-on:click="routeTo('my-page')"></div>
+      <div class="button" v-bind:class="{ '-on': props.location=='my-page'}" id="my-page" v-on:click="myPageButton"></div>
       <div class="button" v-bind:class="{ '-on': props.location=='likes'}" id="likes"></div>
     </div>
   </div>
@@ -16,6 +16,23 @@
     methods: {
       routeTo: function (destination) {
         this.$router.push(destination)
+      },
+      myPageButton () {
+        let self = this
+        self.checkIfLoggedIn(function (response) {
+          if (response.status !== 'connected') {
+            self.showLoginPopup()
+          }
+        })
+      },
+      checkIfLoggedIn (functionWith) {
+        window['FB'].getLoginStatus(function (response) {
+          functionWith(response)
+        })
+      },
+      showLoginPopup () {
+        window['FB'].login(function (response) {
+        })
       }
     }
   }

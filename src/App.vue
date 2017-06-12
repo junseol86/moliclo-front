@@ -7,8 +7,21 @@
 </template>
 
 <script>
+
 export default {
-  name: 'app'
+  name: 'app',
+  mounted () {
+    // let vm = this
+    window.fbAsyncInit = function () {
+      window['FB'].init({
+        appId: '834049790080322',
+        cookie: true,
+        xfbml: true,
+        version: 'v2.8'
+      })
+      window['FB'].AppEvents.logPageView()
+    }
+  }
 }
 </script>
 
